@@ -1,0 +1,62 @@
+---
+layout: wrapper
+---
+
+<main class="artwork-detail-page">
+    <a class="back-to-gallery" href="/artwork/">Back to Artwork Gallery</a>
+
+    <article class="artwork-detail">
+        <header class="artwork-detail-header">
+            <p class="artwork-kicker">Artwork Detail</p>
+            <h1>{{ page.title }}</h1>
+        </header>
+
+        <div class="artwork-detail-grid">
+            <section class="artwork-detail-images" aria-label="Artwork images">
+                {% assign main_image = page.main-image | default: page.gallery[0] %}
+                {% if main_image %}
+                    <img class="artwork-main-image" src="{{ main_image }}" alt="{{ page.title }} main image">
+                {% endif %}
+
+                {% if page.gallery %}
+                    <div class="artwork-detail-gallery">
+                        {% for image in page.gallery offset:1 limit:4 %}
+                            <img src="{{ image }}" alt="{{ page.title }} gallery image {{ forloop.index }}">
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="artwork-detail-info" aria-label="Artwork information">
+                <div class="artwork-description">
+                    <h2>Description</h2>
+                    <p>{{ page.description }}</p>
+                    {{ content }}
+                </div>
+
+                <dl class="artwork-meta-list">
+                    <div>
+                        <dt>Medium</dt>
+                        <dd>{{ page.medium }}</dd>
+                    </div>
+                    <div>
+                        <dt>Dimensions</dt>
+                        <dd>{{ page.dimensions }}</dd>
+                    </div>
+                    <div>
+                        <dt>Year</dt>
+                        <dd>{{ page.year }}</dd>
+                    </div>
+                    <div>
+                        <dt>Availability</dt>
+                        <dd>{{ page.availability }}</dd>
+                    </div>
+                </dl>
+
+                {% if page.etsy-url %}
+                    <a class="artwork-primary-button" href="{{ page.etsy-url }}" target="_blank" rel="noopener noreferrer">Purchase on Etsy</a>
+                {% endif %}
+            </section>
+        </div>
+    </article>
+</main>

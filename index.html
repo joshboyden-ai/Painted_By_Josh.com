@@ -5,16 +5,52 @@
 layout: wrapper
 ---
 
-{% include hero.html%}
+<main class="landing-page">
+    <section class="landing-hero" aria-labelledby="landing-title">
+        <div class="landing-intro">
+            <p class="landing-kicker">Portfolio Gateway</p>
+            <h1 id="landing-title">Josh Boyden</h1>
+            <p class="landing-subtitle">Mechanical Engineer &bull; Artist &bull; Builder</p>
+            <p class="landing-description">
+                I build electromechanical projects with the same curiosity I bring to the studio:
+                making ideas tangible through design, fabrication, testing, and visual craft.
+            </p>
+        </div>
 
+        <div class="landing-card-grid">
+            <a class="landing-card engineering-card" href="/projects/" aria-label="Explore Engineering Portfolio">
+                <div class="landing-card-image pinball-placeholder" role="img" aria-label="Placeholder image of a pinball machine">
+                    <div class="pinball-cabinet">
+                        <span class="pinball-lane"></span>
+                        <span class="pinball-bumper bumper-one"></span>
+                        <span class="pinball-bumper bumper-two"></span>
+                        <span class="pinball-bumper bumper-three"></span>
+                        <span class="pinball-flipper flipper-left"></span>
+                        <span class="pinball-flipper flipper-right"></span>
+                    </div>
+                </div>
+                <div class="landing-card-content">
+                    <h2>Engineering Portfolio</h2>
+                    <p>Mechanical design, fabrication, controls, and electromechanical builds.</p>
+                    <span class="landing-button">Explore Engineering</span>
+                </div>
+            </a>
 
-
-<div class="arrow"> 
-    <a href="#projects">
-        More About Me
-    <i class="fa-solid fa-angles-down"></i>
-    </a> 
-</div>
-{% include projects.html%}
-{% include skills.html%}
-{% include contact.html%}
+            <a class="landing-card artwork-card" href="/artwork/" aria-label="View Artwork Gallery">
+                <div class="landing-card-image painting-placeholder" role="img" aria-label="Placeholder painting">
+                    <div class="painting-frame">
+                        <span class="paint-sun"></span>
+                        <span class="paint-stroke stroke-one"></span>
+                        <span class="paint-stroke stroke-two"></span>
+                        <span class="paint-stroke stroke-three"></span>
+                    </div>
+                </div>
+                <div class="landing-card-content">
+                    <h2>Artwork Gallery</h2>
+                    <p>Paintings, studies, and visual work from the studio side of the practice.</p>
+                    <span class="landing-button">View Artwork</span>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>

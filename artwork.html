@@ -1,0 +1,87 @@
+---
+layout: wrapper
+permalink: /artwork/
+---
+
+<main class="artwork-page">
+    <section class="artwork-hero" aria-labelledby="artwork-title">
+        <div class="artwork-hero-text">
+            <p class="artwork-kicker">Artwork Gallery</p>
+            <h1 id="artwork-title">Artwork by Josh Boyden</h1>
+            <p>
+                Josh creates original paintings, prints, and commission work for collectors,
+                interiors, and personal spaces. This gallery is a placeholder structure for
+                available work, featured pieces, and future commission details.
+            </p>
+            <div class="artwork-actions">
+                <a class="artwork-primary-button" href="#available-work">Shop Available Work</a>
+                <a class="artwork-secondary-link" href="mailto:">Commission inquiries</a>
+            </div>
+        </div>
+
+        <div class="featured-artwork" aria-label="Featured artwork placeholder">
+            <div class="featured-artwork-image">
+                <span class="featured-sun"></span>
+                <span class="featured-shape shape-one"></span>
+                <span class="featured-shape shape-two"></span>
+                <span class="featured-shape shape-three"></span>
+            </div>
+            <div class="featured-artwork-content">
+                <p class="artwork-kicker">Featured Artwork</p>
+                <h2>Featured Artwork Placeholder</h2>
+                <p>Replace this area with a current painting, print release, or highlighted commission sample.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="artwork-categories" aria-label="Artwork categories">
+        <div class="artwork-category">
+            <h2>Original Paintings</h2>
+            <p>Placeholder copy for one-of-a-kind paintings and available original work.</p>
+        </div>
+        <div class="artwork-category">
+            <h2>Prints</h2>
+            <p>Placeholder copy for future print runs, editions, and reproduction details.</p>
+        </div>
+        <div class="artwork-category">
+            <h2>Commissions</h2>
+            <p>Placeholder copy for custom artwork requests, timelines, and inquiry details.</p>
+        </div>
+    </section>
+
+    <section class="artwork-gallery-section" id="available-work" aria-labelledby="gallery-title">
+        <div class="section-heading">
+            <p class="artwork-kicker">Available Work</p>
+            <h2 id="gallery-title">Gallery Placeholders</h2>
+        </div>
+
+        <div class="artwork-gallery-grid">
+            {% assign artworks = site.artworks | sort: "title" %}
+            {% for artwork in artworks %}
+                <article class="artwork-card">
+                    {% assign card_image = artwork.main-image | default: artwork.gallery[0] %}
+                    {% if card_image %}
+                        <img class="artwork-card-image" src="{{ artwork.url | relative_url }}{{ card_image }}" alt="{{ artwork.title }} placeholder image">
+                    {% else %}
+                        <div class="artwork-placeholder artwork-placeholder-one" role="img" aria-label="Placeholder artwork image"></div>
+                    {% endif %}
+                    <div class="artwork-card-content">
+                        <h3>{{ artwork.title }}</h3>
+                        <p>{{ artwork.medium }}</p>
+                        <span class="availability-status">{{ artwork.availability }}</span>
+                        <a class="artwork-card-button" href="{{ artwork.url | relative_url }}">View Artwork</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="artwork-cta" aria-label="Artwork purchase and commission call to action">
+        <h2>Ready to collect or commission artwork?</h2>
+        <p>Use this placeholder call to action for available work and custom commission inquiries.</p>
+        <div class="artwork-actions">
+            <a class="artwork-primary-button" href="#available-work">Purchase Artwork</a>
+            <a class="artwork-secondary-link" href="mailto:">Contact for commission inquiries</a>
+        </div>
+    </section>
+</main>
