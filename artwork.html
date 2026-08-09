@@ -60,8 +60,9 @@ permalink: /artwork/
             {% for artwork in artworks %}
                 <article class="artwork-card">
                     {% assign card_image = artwork.main-image | default: artwork.gallery[0] %}
+                    {% assign artwork_image_base = artwork.url | remove: 'index/' | relative_url %}
                     {% if card_image %}
-                        <img class="artwork-card-image" src="{{ artwork.url | relative_url }}{{ card_image }}" alt="{{ artwork.title }} placeholder image">
+                        <img class="artwork-card-image" src="{{ artwork_image_base }}{{ card_image }}" alt="{{ artwork.title }} placeholder image">
                     {% else %}
                         <div class="artwork-placeholder artwork-placeholder-one" role="img" aria-label="Placeholder artwork image"></div>
                     {% endif %}

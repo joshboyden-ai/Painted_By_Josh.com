@@ -13,15 +13,20 @@ layout: wrapper
 
         <div class="artwork-detail-grid">
             <section class="artwork-detail-images" aria-label="Artwork images">
+                {% assign artwork_image_base = page.url | remove: 'index/' | relative_url %}
                 {% assign main_image = page.main-image | default: page.gallery[0] %}
                 {% if main_image %}
-                    <img class="artwork-main-image" src="{{ main_image }}" alt="{{ page.title }} main image">
+                    <img class="artwork-main-image" src="{{ artwork_image_base }}{{ main_image }}" alt="{{ page.title }} main image">
                 {% endif %}
 
                 {% if page.gallery %}
                     <div class="artwork-detail-gallery">
-                        {% for image in page.gallery offset:1 limit:4 %}
-                            <img src="{{ image }}" alt="{{ page.title }} gallery image {{ forloop.index }}">
+                        {% for image in page.gallery %}
+                            {% assign thumbnail_src = artwork_image_base | append: image %}
+                            {% assign selected_src = artwork_image_base | append: main_image %}
+                            <button class="artwork-thumbnail{% if thumbnail_src == selected_src %} is-selected{% endif %}" type="button" data-full-image="{{ thumbnail_src }}" data-image-alt="{{ page.title | escape }} image {{ forloop.index }}" aria-label="Show {{ page.title }} image {{ forloop.index }}" aria-pressed="{% if thumbnail_src == selected_src %}true{% else %}false{% endif %}">
+                                <img src="{{ artwork_image_base }}{{ image }}" alt="{{ page.title }} gallery image {{ forloop.index }}">
+                            </button>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -59,4 +64,40 @@ layout: wrapper
             </section>
         </div>
     </article>
+
+    {% if page.gallery %}
+        <script>
+            (function () {
+                var mainImage = document.querySelector('.artwork-main-image');
+                var thumbnails = document.querySelectorAll('.artwork-thumbnail');
+
+                if (!mainImage || !thumbnails.length) {
+                    return;
+                }
+
+                thumbnails.forEach(function (thumbnail) {
+                    thumbnail.addEventListener('click', function () {
+                        if (thumbnail.classList.contains('is-selected')) {
+                            return;
+                        }
+
+                        thumbnails.forEach(function (item) {
+                            item.classList.remove('is-selected');
+                            item.setAttribute('aria-pressed', 'false');
+                        });
+
+                        thumbnail.classList.add('is-selected');
+                        thumbnail.setAttribute('aria-pressed', 'true');
+                        mainImage.classList.add('is-changing');
+
+                        window.setTimeout(function () {
+                            mainImage.src = thumbnail.dataset.fullImage;
+                            mainImage.alt = thumbnail.dataset.imageAlt;
+                            mainImage.classList.remove('is-changing');
+                        }, 120);
+                    });
+                });
+            }());
+        </script>
+    {% endif %}
 </main>
