@@ -4,59 +4,79 @@ permalink: /artwork/
 ---
 
 <main class="artwork-page">
+    <a class="store-banner" href="https://www.etsy.com/shop/PaintedByJoshStore" target="_blank" rel="noopener noreferrer">
+        <svg class="store-banner-icon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 8h12l-1 12H7L6 8Z"></path>
+            <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+        </svg>
+        <span>Painted by Josh Store</span>
+        <svg class="store-banner-icon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M4 5h2l2 10h9l2-7H7"></path>
+            <path d="M9 20h.01"></path>
+            <path d="M17 20h.01"></path>
+        </svg>
+    </a>
+
     <section class="artwork-hero" aria-labelledby="artwork-title">
         <div class="artwork-hero-text">
-            <p class="artwork-kicker">Artwork Gallery</p>
-            <h1 id="artwork-title">Artwork by Josh Boyden</h1>
+            <h1 id="artwork-title">Painted By Josh</h1>
             <p>
-                Josh creates original paintings, prints, and commission work for collectors,
-                interiors, and personal spaces. This gallery is a placeholder structure for
-                available work, featured pieces, and future commission details.
+                I am a mechanical engineering student at the University of Alabama with a
+                growing interest in painting and visual art. I started sharing my artwork
+                in late 2025, and in 2026 I opened an Etsy shop for original pieces,
+                prints, and commission work.
             </p>
-            <div class="artwork-actions">
-                <a class="artwork-primary-button" href="#available-work">Shop Available Work</a>
-                <a class="artwork-secondary-link" href="mailto:">Commission inquiries</a>
+            <div class="artwork-hero-options" aria-label="Artwork actions">
+                <a class="artwork-hero-option" href="https://www.etsy.com/shop/PaintedByJoshStore" target="_blank" rel="noopener noreferrer">
+                    <span>Shop</span>
+                    <small>Visit the Etsy store</small>
+                </a>
+                <a class="artwork-hero-option" href="/commissions/" data-commission-modal>
+                    <span>Commissions</span>
+                    <small>Request a custom piece</small>
+                </a>
+                <a class="artwork-hero-option" href="#artwork-faq">
+                    <span>FAQ</span>
+                    <small>Answers for buyers</small>
+                </a>
+            </div>
+            <p class="artwork-social-heading">Follow Along</p>
+            <div class="artwork-social-links" aria-label="Social media links">
+                <a href="https://www.tiktok.com/@painted_by_josh" target="_blank" rel="noopener noreferrer" aria-label="Painted by Josh on TikTok">
+                    <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://www.instagram.com/painted_by_josh/" target="_blank" rel="noopener noreferrer" aria-label="Painted by Josh on Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/josh.boyden.2025" target="_blank" rel="noopener noreferrer" aria-label="Josh Boyden on Facebook">
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                    <span>Facebook</span>
+                </a>
             </div>
         </div>
 
-        <div class="featured-artwork" aria-label="Featured artwork placeholder">
-            <div class="featured-artwork-image">
-                <span class="featured-sun"></span>
-                <span class="featured-shape shape-one"></span>
-                <span class="featured-shape shape-two"></span>
-                <span class="featured-shape shape-three"></span>
-            </div>
-            <div class="featured-artwork-content">
-                <p class="artwork-kicker">Featured Artwork</p>
-                <h2>Featured Artwork Placeholder</h2>
-                <p>Replace this area with a current painting, print release, or highlighted commission sample.</p>
-            </div>
-        </div>
+        {% assign featured_artwork = site.artworks | where: "featured", true | first %}
+        {% if featured_artwork %}
+            {% assign featured_image = featured_artwork.main-image | default: featured_artwork.gallery[0] %}
+            {% assign featured_image_base = featured_artwork.url | remove: 'index/' | relative_url %}
+            <a class="featured-artwork" href="{{ featured_artwork.url | relative_url }}" aria-label="View featured artwork {{ featured_artwork.title }}">
+                {% if featured_image %}
+                    <img class="featured-artwork-image" src="{{ featured_image_base }}{{ featured_image }}" alt="{{ featured_artwork.title }} featured artwork">
+                {% endif %}
+                <div class="featured-artwork-content">
+                    <p class="artwork-kicker">Featured Artwork</p>
+                    <h2>{{ featured_artwork.title }}</h2>
+                    <p>{{ featured_artwork.description }}</p>
+                </div>
+            </a>
+        {% endif %}
     </section>
 
-    <section class="artwork-categories" aria-label="Artwork categories">
-        <div class="artwork-category">
-            <h2>Original Paintings</h2>
-            <p>Placeholder copy for one-of-a-kind paintings and available original work.</p>
-        </div>
-        <div class="artwork-category">
-            <h2>Prints</h2>
-            <p>Placeholder copy for future print runs, editions, and reproduction details.</p>
-        </div>
-        <div class="artwork-category">
-            <h2>Commissions</h2>
-            <p>Placeholder copy for custom artwork requests, timelines, and inquiry details.</p>
-        </div>
-    </section>
-
-    <section class="artwork-gallery-section" id="available-work" aria-labelledby="gallery-title">
-        <div class="section-heading">
-            <p class="artwork-kicker">Available Work</p>
-            <h2 id="gallery-title">Gallery Placeholders</h2>
-        </div>
-
+    <section class="artwork-gallery-section" id="available-work" aria-label="Artwork gallery">
         <div class="artwork-gallery-grid">
-            {% assign artworks = site.artworks | sort: "title" %}
+            {% assign artworks = site.artworks | sort: "date-created" | reverse %}
             {% for artwork in artworks %}
                 <article class="artwork-card">
                     {% assign card_image = artwork.main-image | default: artwork.gallery[0] %}
@@ -68,7 +88,13 @@ permalink: /artwork/
                     {% endif %}
                     <div class="artwork-card-content">
                         <h3>{{ artwork.title }}</h3>
-                        <p>{{ artwork.medium }}</p>
+                        <p>
+                            {% if artwork.date-created %}
+                                {{ artwork.date-created | date: "%B %-d, %Y" }}
+                            {% else %}
+                                {{ artwork.year }}
+                            {% endif %}
+                        </p>
                         <span class="availability-status">{{ artwork.availability }}</span>
                         <a class="artwork-card-button" href="{{ artwork.url | relative_url }}">View Artwork</a>
                     </div>
@@ -77,12 +103,34 @@ permalink: /artwork/
         </div>
     </section>
 
+    <section class="artwork-faq" id="artwork-faq" aria-labelledby="artwork-faq-title">
+        <div class="section-heading">
+            <p class="artwork-kicker">Details</p>
+            <h2 id="artwork-faq-title">FAQ</h2>
+        </div>
+
+        <div class="artwork-faq-grid">
+            <div class="artwork-faq-item">
+                <h3>Do you take commissions?</h3>
+                <p>Yes. Commission availability depends on the size, subject, and current project schedule.</p>
+            </div>
+            <div class="artwork-faq-item">
+                <h3>Where can I buy your work?</h3>
+                <p>Available pieces and prints are listed through the Painted by Josh Etsy store.</p>
+            </div>
+            <div class="artwork-faq-item">
+                <h3>When did you start selling?</h3>
+                <p>I started sharing artwork in late 2025 and opened the Etsy shop in 2026.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="artwork-cta" aria-label="Artwork purchase and commission call to action">
         <h2>Ready to collect or commission artwork?</h2>
         <p>Use this placeholder call to action for available work and custom commission inquiries.</p>
         <div class="artwork-actions">
-            <a class="artwork-primary-button" href="#available-work">Purchase Artwork</a>
-            <a class="artwork-secondary-link" href="mailto:">Contact for commission inquiries</a>
+            <a class="artwork-primary-button" href="https://www.etsy.com/shop/PaintedByJoshStore" target="_blank" rel="noopener noreferrer">Purchase Artwork</a>
+            <a class="artwork-secondary-link" href="/commissions/" data-commission-modal>Contact for commission inquiries</a>
         </div>
     </section>
 </main>

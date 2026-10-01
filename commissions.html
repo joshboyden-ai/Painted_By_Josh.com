@@ -1,0 +1,127 @@
+---
+layout: wrapper
+permalink: /commissions/
+---
+
+<main class="commissions-page">
+    <section class="commissions-hero" aria-labelledby="commissions-title">
+        <div>
+            <p class="artwork-kicker">Custom Artwork</p>
+            <h1 id="commissions-title">Commission Request</h1>
+            <p>
+                Tell me what you have in mind for a custom painting. Share the subject,
+                size, deadline, and any reference details that would help me understand
+                the piece.
+            </p>
+        </div>
+    </section>
+
+    <section class="commission-form-section" aria-label="Commission request form">
+        <form class="commission-form" action="{{ site.formspree-key }}" method="POST">
+            <fieldset class="request-type-fieldset">
+                <legend>What can I help with?</legend>
+                <label class="request-type-option">
+                    <input type="radio" name="request_type" value="Commission" checked>
+                    <span>Commission</span>
+                </label>
+                <label class="request-type-option">
+                    <input type="radio" name="request_type" value="Question">
+                    <span>Question</span>
+                </label>
+            </fieldset>
+
+            <div class="form-row">
+                <label for="commission-name">Name</label>
+                <input type="text" id="commission-name" name="name" autocomplete="name" required>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-row">
+                    <label for="response-method">Preferred Response</label>
+                    <select id="response-method" name="preferred_response" required>
+                        <option value="Email">Email</option>
+                        <option value="Phone">Phone Number</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="contact-info">Email or Phone Number</label>
+                    <input type="text" id="contact-info" name="contact_info" autocomplete="email" required>
+                </div>
+            </div>
+
+            <div class="question-fields" data-request-panel="Question" hidden>
+                <div class="form-row">
+                    <label for="question-message">Question</label>
+                    <textarea id="question-message" name="question_message" rows="8" placeholder="Ask anything about available artwork, commissions, prints, shipping, or timing."></textarea>
+                </div>
+            </div>
+
+            <div class="commission-fields" data-request-panel="Commission">
+                <div class="form-row">
+                    <label for="commission-type">Commission Type</label>
+                    <select id="commission-type" name="commission_type">
+                        <option value="Painting">Painting</option>
+                        <option value="Mural">Mural</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="commission-size">Preferred Size</label>
+                        <input type="text" id="commission-size" name="preferred_size" placeholder="Example: 11 x 14 in.">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="commission-budget">Budget Range</label>
+                        <input type="text" id="commission-budget" name="budget_range" placeholder="Optional">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="commission-timeline">Timeline</label>
+                    <input type="text" id="commission-timeline" name="timeline" placeholder="When would you like it completed?">
+                </div>
+
+                <div class="form-row">
+                    <label for="commission-details">Project Details</label>
+                    <textarea id="commission-details" name="commission_details" rows="8" placeholder="Describe the idea, colors, background, reference photos, shipping location, or anything else I should know."></textarea>
+                </div>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Painted by Josh commission request">
+            <button type="submit">Send Request</button>
+        </form>
+    </section>
+</main>
+
+<script>
+    (function () {
+        var requestOptions = document.querySelectorAll('input[name="request_type"]');
+        var panels = document.querySelectorAll('[data-request-panel]');
+        var questionMessage = document.getElementById('question-message');
+        var commissionDetails = document.getElementById('commission-details');
+
+        function updateRequestForm() {
+            var selected = document.querySelector('input[name="request_type"]:checked').value;
+
+            requestOptions.forEach(function (option) {
+                option.closest('.request-type-option').classList.toggle('is-selected', option.value === selected);
+            });
+
+            panels.forEach(function (panel) {
+                panel.hidden = panel.dataset.requestPanel !== selected;
+            });
+
+            questionMessage.required = selected === 'Question';
+            commissionDetails.required = selected === 'Commission';
+        }
+
+        requestOptions.forEach(function (option) {
+            option.addEventListener('change', updateRequestForm);
+        });
+
+        updateRequestForm();
+    }());
+</script>

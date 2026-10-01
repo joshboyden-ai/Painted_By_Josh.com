@@ -1,7 +1,13 @@
 <!-- _includes/nav.html -->
 <nav>
     <div class="left">
-        <a href="/">{{site.name}}</a>
+        {% if page.url contains '/commissions/' %}
+            <a href="/commissions/">Commissions</a>
+        {% elsif page.url contains '/artwork/' %}
+            <a href="/artwork/">Artwork Gallery</a>
+        {% else %}
+            <a href="/">Home</a>
+        {% endif %}
     </div>
 
     <!-- Desktop Menu -->

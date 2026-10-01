@@ -3,7 +3,8 @@ layout: artwork
 title: "Germie Bernard Catch"
 medium: "Acrylic"
 dimensions: "11 × 14 in."
-year: 2025
+year: 2026
+date-created: 2026-01-22
 availability: "Available"
 description: "One of the first paintings I shared online, this piece captures Germie Bernard making a catch over Oklahoma's defense in the College Football Playoff."
 etsy-url: "https://www.etsy.com/listing/4461050435/germie-bernard-catch-alabama-football"

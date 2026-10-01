@@ -1,17 +1,16 @@
 ---
 layout: artwork
-title: "Germie Bernard Catch"
-medium: "Acrylic"
-dimensions: "11 × 14 in."
-year: 2025
+title: "The Dots of Denny"
+medium: "Acrylic on canvas"
+dimensions: "12 x 16 in."
+year: 2026
+date-created: 2026-07-10
 availability: "Available"
-description: "One of the first paintings I shared online, this piece captures Germie Bernard making a catch over Oklahoma's defense in the College Football Playoff."
-etsy-url: "https://www.etsy.com/listing/4461050435/germie-bernard-catch-alabama-football"
+featured: true
+description: "An Alabama gameday scene from my perspective in the upper section of the stadium, with the Million Dollar Band forming the script A on the field as jets fly over above."
+etsy-url: "https://www.etsy.com/listing/4586106062/the-dots-of-denny-alabama-football-fine"
 
-main-image: image-1.jpg
+main-image: image-1.JPEG
 gallery:
-  - image-1.jpg
-  - image-2.jpg
-  - image-3.jpg
-  - image-4.jpg
+  - image-1.JPEG
 ---

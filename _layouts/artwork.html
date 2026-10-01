@@ -49,8 +49,14 @@ layout: wrapper
                         <dd>{{ page.dimensions }}</dd>
                     </div>
                     <div>
-                        <dt>Year</dt>
-                        <dd>{{ page.year }}</dd>
+                        <dt>Date Created</dt>
+                        <dd>
+                            {% if page.date-created %}
+                                {{ page.date-created | date: "%B %-d, %Y" }}
+                            {% else %}
+                                {{ page.year }}
+                            {% endif %}
+                        </dd>
                     </div>
                     <div>
                         <dt>Availability</dt>
@@ -58,7 +64,9 @@ layout: wrapper
                     </div>
                 </dl>
 
-                {% if page.etsy-url %}
+                {% if page.availability == "Not available" %}
+                    <a class="artwork-primary-button" href="{{ page.commission-url | default: '/commissions/' }}" data-commission-modal>Request Similar Commission</a>
+                {% elsif page.etsy-url %}
                     <a class="artwork-primary-button" href="{{ page.etsy-url }}" target="_blank" rel="noopener noreferrer">Purchase on Etsy</a>
                 {% endif %}
             </section>

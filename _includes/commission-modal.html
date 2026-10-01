@@ -1,0 +1,170 @@
+<div class="commission-modal" id="commission-modal" aria-hidden="true">
+    <div class="commission-modal-backdrop" data-commission-close></div>
+    <section class="commission-modal-panel" role="dialog" aria-modal="true" aria-labelledby="commission-modal-title">
+        <button class="commission-modal-close" type="button" data-commission-close aria-label="Close commission form">&times;</button>
+        <div class="commission-modal-header">
+            <p class="artwork-kicker">Custom Artwork</p>
+            <h2 id="commission-modal-title">Commission Request</h2>
+            <p>Send a question or start a custom artwork request without leaving the page.</p>
+        </div>
+
+        <form class="commission-form" action="{{ site.formspree-key }}" method="POST">
+            <fieldset class="request-type-fieldset">
+                <legend>What can I help with?</legend>
+                <label class="request-type-option">
+                    <input type="radio" name="request_type" value="Commission" checked>
+                    <span>Commission</span>
+                </label>
+                <label class="request-type-option">
+                    <input type="radio" name="request_type" value="Question">
+                    <span>Question</span>
+                </label>
+            </fieldset>
+
+            <div class="form-row">
+                <label for="modal-commission-name">Name</label>
+                <input type="text" id="modal-commission-name" name="name" autocomplete="name" required>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-row">
+                    <label for="modal-response-method">Preferred Response</label>
+                    <select id="modal-response-method" name="preferred_response" required>
+                        <option value="Email">Email</option>
+                        <option value="Phone">Phone Number</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="modal-contact-info">Email or Phone Number</label>
+                    <input type="text" id="modal-contact-info" name="contact_info" autocomplete="email" required>
+                </div>
+            </div>
+
+            <div class="question-fields" data-request-panel="Question" hidden>
+                <div class="form-row">
+                    <label for="modal-question-message">Question</label>
+                    <textarea id="modal-question-message" name="question_message" rows="6" placeholder="Ask anything about available artwork, commissions, prints, shipping, or timing."></textarea>
+                </div>
+            </div>
+
+            <div class="commission-fields" data-request-panel="Commission">
+                <div class="form-row">
+                    <label for="modal-commission-type">Commission Type</label>
+                    <select id="modal-commission-type" name="commission_type">
+                        <option value="Painting">Painting</option>
+                        <option value="Mural">Mural</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="modal-commission-size">Preferred Size</label>
+                        <input type="text" id="modal-commission-size" name="preferred_size" placeholder="Example: 11 x 14 in.">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="modal-commission-budget">Budget Range</label>
+                        <input type="text" id="modal-commission-budget" name="budget_range" placeholder="Optional">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="modal-commission-timeline">Timeline</label>
+                    <input type="text" id="modal-commission-timeline" name="timeline" placeholder="When would you like it completed?">
+                </div>
+
+                <div class="form-row">
+                    <label for="modal-commission-details">Project Details</label>
+                    <textarea id="modal-commission-details" name="commission_details" rows="6" placeholder="Describe the idea, colors, background, reference photos, shipping location, or anything else I should know."></textarea>
+                </div>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Painted by Josh commission request">
+            <button type="submit">Send Request</button>
+        </form>
+    </section>
+</div>
+
+<script>
+    (function () {
+        var modal = document.getElementById('commission-modal');
+        var modalTriggers = document.querySelectorAll('[data-commission-modal]');
+        var closeButtons = document.querySelectorAll('[data-commission-close]');
+        var lastFocusedElement = null;
+
+        if (!modal || !modalTriggers.length) {
+            return;
+        }
+
+        function updateRequestForm(form) {
+            var selectedOption = form.querySelector('input[name="request_type"]:checked');
+            var selected = selectedOption ? selectedOption.value : 'Commission';
+            var panels = form.querySelectorAll('[data-request-panel]');
+            var questionMessage = form.querySelector('[name="question_message"]');
+            var commissionDetails = form.querySelector('[name="commission_details"]');
+
+            form.querySelectorAll('.request-type-option').forEach(function (label) {
+                var option = label.querySelector('input[name="request_type"]');
+                label.classList.toggle('is-selected', option && option.value === selected);
+            });
+
+            panels.forEach(function (panel) {
+                panel.hidden = panel.dataset.requestPanel !== selected;
+            });
+
+            if (questionMessage) {
+                questionMessage.required = selected === 'Question';
+            }
+
+            if (commissionDetails) {
+                commissionDetails.required = selected === 'Commission';
+            }
+        }
+
+        function openModal(event) {
+            event.preventDefault();
+            lastFocusedElement = document.activeElement;
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            var firstInput = modal.querySelector('input, select, textarea, button');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        modalTriggers.forEach(function (trigger) {
+            trigger.addEventListener('click', openModal);
+        });
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener('click', closeModal);
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+
+        modal.querySelectorAll('.commission-form').forEach(function (form) {
+            form.querySelectorAll('input[name="request_type"]').forEach(function (option) {
+                option.addEventListener('change', function () {
+                    updateRequestForm(form);
+                });
+            });
+            updateRequestForm(form);
+        });
+    }());
+</script>
