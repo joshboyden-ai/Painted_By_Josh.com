@@ -1,7 +1,9 @@
 <!-- _includes/nav.html -->
 <nav>
     <div class="left">
-        {% if page.url contains '/commissions/' %}
+        {% if page.collection == 'projects' or page.layout == 'project-showcase' %}
+            <a href="{{ '/projects/' | relative_url }}" aria-label="Back to engineering projects">&larr; Back</a>
+        {% elsif page.url contains '/commissions/' %}
             <a href="/commissions/">Commissions</a>
         {% elsif page.url contains '/artwork/' %}
             <a href="/artwork/">Artwork Gallery</a>

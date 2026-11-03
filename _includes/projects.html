@@ -1,26 +1,71 @@
-<!-- SECTION 3: project -->
-<section id="projects" class="project-grid-section">
-    <h2>Featured Project</h2>
+<main class="engineering-page">
+    {% assign featured_project = site.projects | first %}
 
-    <div class="grid-container">
-        {% for item in site.projects %}
-    <a href="{{ item.url }}" class="project-link">
-        <div class="project-card">
-            {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
-            {% assign image_path = "/" | append: folder_path | append: item['main-image'] %}
-            <img src="{{ image_path }}" alt="{{ item.title }} image">
-            <h3 class="project-title">{{ item.title }}</h3>
-            <div class="project-skills">
-                {% for skill in item.skills %}
-                    <span class="skill">{{ skill }}</span>
-                {% endfor %}
-            </div>
-            <p class="project-description">{{ item.description }}</p>
-            <button class="read-more">Read more →</button>
-        </div>
-    </a>
-{% endfor %}
+    <div class="engineering-banner" aria-label="Engineering portfolio banner">
+        <span>Engineering Portfolio</span>
     </div>
 
+    <section class="engineering-hero" aria-labelledby="engineering-title">
+        <div class="engineering-hero-text">
+            <h1 id="engineering-title">Engineering Portfolio</h1>
+            <p>
+                Mechanical engineering projects focused on design, fabrication, controls,
+                testing, and hands-on problem solving. This section highlights the process
+                behind each build, from early concepts through final iteration.
+            </p>
+            <div class="engineering-hero-options" aria-label="Engineering actions">
+                <a class="engineering-hero-option" href="#engineering-projects">
+                    <span>Projects</span>
+                    <small>View the build archive</small>
+                </a>
+                <a class="engineering-hero-option" href="{{ site.resume-url }}" target="_blank" rel="noopener noreferrer">
+                    <span>Resume</span>
+                    <small>Open my PDF Resume</small>
+                </a>
+                <a class="engineering-hero-option" href="{{ '/assets/documents/Josh-Boyden-Engineering-Portfolio.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">
+                    <span>Portfolio</span>
+                    <small>View my engineering portfolio PDF</small>
+                </a>
+            </div>
+        </div>
 
- </section>
+        {% if featured_project %}
+            <a class="featured-project" href="{{ featured_project.url | relative_url }}" aria-label="View featured project {{ featured_project.title }}">
+                {% assign folder_path = featured_project.path | split: "/" | slice: 0, 2 | join: "/" %}
+                {% assign featured_project_image = "/" | append: folder_path | append: featured_project['main-image'] %}
+                <div class="featured-project-image-wrap">
+                    <img class="featured-project-image" src="{{ featured_project_image }}" alt="{{ featured_project.title }} featured project image">
+                </div>
+                <div class="featured-project-content">
+                    <p class="artwork-kicker">Featured Project</p>
+                    <h2>{{ featured_project.title }}</h2>
+                    <p>{{ featured_project.description }}</p>
+                </div>
+            </a>
+        {% endif %}
+    </section>
+
+    <section id="engineering-projects" class="project-grid-section" aria-label="Engineering projects">
+        <div class="grid-container">
+            {% for item in site.projects %}
+                <a href="{{ item.url | relative_url }}" class="project-link">
+                    <div class="project-card">
+                        {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
+                        {% assign image_path = "/" | append: folder_path | append: item['main-image'] %}
+                        <div class="project-card-image-wrap">
+                            <img src="{{ image_path }}" alt="{{ item.title }} image">
+                        </div>
+                        <h3 class="project-title">{{ item.title }}</h3>
+                        <div class="project-skills">
+                            {% for skill in item.skills %}
+                                <span class="skill">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                        <p class="project-description">{{ item.description }}</p>
+                        <span class="read-more">Read more</span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+</main>

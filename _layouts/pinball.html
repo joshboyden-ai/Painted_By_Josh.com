@@ -1,0 +1,28 @@
+---
+layout: wrapper
+---
+<link rel="stylesheet" href="{{ '/css/pinball.css' | relative_url }}">
+<main class="pinball-study" aria-labelledby="pinball-title">
+  <a class="pinball-back" href="{{ '/projects/' | relative_url }}">&larr; Engineering projects</a>
+  <header class="pinball-hero">
+    <p class="pinball-eyebrow">Engineering case study</p>
+    <h1 id="pinball-title">{{ page.title }}</h1>
+    <p class="pinball-summary">{{ page.description }}</p>
+    <ul class="pinball-tags" aria-label="Project skills">
+      {% assign hero_skills = 'CAD,Mechanical Design,Arduino,Electronics,Controls,Fabrication,Prototyping' | split: ',' %}
+      {% for skill in hero_skills %}<li>{{ skill }}</li>{% endfor %}
+    </ul>
+    <figure class="pinball-cover">
+      {% assign project_folder = page.path | split: '/' | slice: 0, 2 | join: '/' | prepend: '/' %}
+      {% assign cover_path = project_folder | append: page['main-image'] %}
+      <img src="{{ cover_path | relative_url }}" alt="Custom electromechanical pinball machine project" fetchpriority="high">
+      <figcaption>Custom Electromechanical Pinball Machine</figcaption>
+    </figure>
+  </header>
+  <nav class="pinball-contents" aria-label="Case study sections">
+    <a href="#overview">Overview</a><a href="#goals">Goals</a><a href="#mechanical">Mechanical</a>
+    <a href="#electronics">Electronics</a><a href="#fabrication">Fabrication</a><a href="#software">Software</a>
+    <a href="#iteration">Iteration</a><a href="#results">Results</a><a href="#media">Media</a><a href="#skills">Skills</a>
+  </nav>
+  {{ content }}
+</main>

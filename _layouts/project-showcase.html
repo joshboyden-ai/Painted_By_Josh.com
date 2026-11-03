@@ -1,0 +1,48 @@
+---
+layout: wrapper
+---
+<link rel="stylesheet" href="{{ '/css/project-showcase.css' | relative_url }}?v=project-banner-3">
+<main class="project-showcase" data-project-showcase aria-labelledby="showcase-title">
+  <header class="showcase-header">
+    <h1 id="showcase-title">{{ page.title }}</h1>
+  </header>
+  <div class="showcase-shell">
+    <aside class="showcase-sidebar" aria-label="Project navigation">
+      <nav class="showcase-nav" aria-label="Project sections">
+        {% for section in page.showcase_sections %}
+          <a href="#{{ section.id }}" data-section-link{% if forloop.first %} aria-current="location"{% endif %}>
+            <span>{{ section.title }}</span>
+          </a>
+        {% endfor %}
+      </nav>
+      <label class="showcase-mobile-label" for="showcase-section-select">Project section</label>
+      <select id="showcase-section-select" class="showcase-select" aria-controls="showcase-panels">
+        {% for section in page.showcase_sections %}<option value="{{ section.id }}">{{ section.title }}</option>{% endfor %}
+      </select>
+      <a class="showcase-exit" href="{{ '/projects/' | relative_url }}">Back to projects &rarr;</a>
+    </aside>
+    <div class="showcase-panels" id="showcase-panels">
+      {% for section in page.showcase_sections %}
+        <section class="showcase-panel" id="{{ section.id }}" aria-labelledby="{{ section.id }}-title" data-showcase-panel>
+          <div class="showcase-panel-content" data-panel-content>
+          <div class="showcase-panel-heading{% if section.hide_heading %} showcase-heading-hidden{% endif %}">
+            <h2 id="{{ section.id }}-title" tabindex="-1">{{ section.title }}</h2>
+            {% unless section.image %}<p>{{ section.placeholder | default: 'Future project content will go here.' }}</p>{% endunless %}
+          </div>
+          <div class="showcase-media-area{% if section.image %} showcase-image-area{% endif %}">
+            {% if section.image %}
+              <img class="showcase-section-image" src="{{ section.image | relative_url }}" alt="{{ section.image_alt | default: section.title | escape }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
+            {% elsif section.content_file %}
+              {% capture section_content %}{% include_relative {{ section.content_file }} %}{% endcapture %}
+              {{ section_content | markdownify }}
+            {% else %}
+              <p>Space for images, text, video, CAD views, or a media gallery.</p>
+            {% endif %}
+          </div>
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+<script src="{{ '/assets/js/project-showcase.js' | relative_url }}?v=normal-page-2" defer></script>
