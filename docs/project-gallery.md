@@ -1,8 +1,8 @@
 # Project photo galleries
 
 The pinball gallery data is in the project's `index.md`, under `project_gallery`.
-The current gallery contains 143 photos and 44 ordinary videos, arranged in four
-eras: Pre-Playfield (52), Playfield (83), Electrical (23), and Final (29).
+The current gallery contains 143 photos and 43 ordinary videos, arranged in four
+eras: Pre-Playfield (52), Playfield (83), Electrical (22), and Final (29).
 The 130 Apple Live Photo movie companions and the ZIP archive are excluded.
 The second video was removed from the listing because it did not work; its source
 file remains in the folder. No source files were deleted or renamed.
@@ -30,8 +30,8 @@ optional `alt` and `caption`, and a `featured` flag.
   featured: true
 ```
 
-Entries marked `featured: true` appear in the project-page preview. Keep five
-entries featured to retain the five-photo preview. Add more entries with
+Entries marked `featured: true` appear in the project-page preview. Keep four
+entries featured to retain the four-cover preview. Add more entries with
 `featured: false` to show them only on the full gallery page. Group order and image
 order follow the YAML list. Rename groups or add more groups with a `title` and
 `images` list to reorganize the right-side collection.
@@ -97,3 +97,6 @@ The route is defined in `project-galleries/pinball.html`, outside the project
 collection so it does not become another engineering project card. Its `project_id`
 matches the project's `gallery_id`. Future projects can reuse `project-gallery`
 with a matching ID, their own permalink, and `project_return_url`.
+
+Electrical Era cover: IMG_2382.JPEG. IMG_2387.MP4 was removed from the
+gallery listing at the owner's request; the original file is retained.

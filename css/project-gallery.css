@@ -1,7 +1,8 @@
 /* Project gallery only: artwork pages retain their existing components. */
-.project-gallery-featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.project-gallery-featured { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.project-gallery-slot-title { margin: 0 0 10px; font-size: 16px; font-weight: 600; text-align: center; }
 .project-gallery-slot { display: block; min-width: 0; color: var(--text-color); }
-.project-gallery-slot > img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.project-gallery-slot > img { display: block; width: 100%; height: auto; aspect-ratio: auto; }
 .project-gallery-slot-caption { display: block; padding-block: 10px; font-size: 13px; color: #596170; }
 .project-gallery-placeholder { display: grid; place-items: center; aspect-ratio: 4 / 3; width: 100%; background: var(--light-background-color); color: #596170; padding: 20px; text-align: center; }
 .project-gallery-placeholder > span { color: inherit; font-size: 13px; line-height: 1.6; }

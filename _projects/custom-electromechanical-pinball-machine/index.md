@@ -16,8 +16,7 @@ story:
   - text: >-
       I fell in love with pinball during my sophomore year of high school after a friend introduced me to the game. What really hooked me was seeing how closely it connected to the physics I was learning in class. Every bounce, collision, ramp, spring, and mechanism happens in the real world, making a pinball machine feel like a box full of physics, art, and engineering.
     image: story-playing.PNG
-    display_width: 80
-    display_max_width: 252
+    display_width: 90
     crop:
       x: 0
       y: 229
@@ -29,6 +28,7 @@ story:
   - text: >-
       That interest eventually turned into the idea of building a machine of my own. My friend and I chose Mario as the theme and began planning the playfield. Before I had experience with CAD or 3D design software, I used Minecraft as a way to build the layout to scale and visualize how the different features could fit together.
     image: story-minecraft.PNG
+    display_width: 79.2
     crop:
       x: 230
       y: 0
@@ -40,6 +40,7 @@ story:
   - text: >-
       Turning that digital idea into a real machine pushed me far outside of what I already knew. Along the way, I learned woodworking, fabrication, sculpting, painting, electronics, controls, programming, and troubleshooting. What started as a high school idea became the largest and most technically diverse project I had ever attempted—and one that continues to teach me something new every time I work on it.
     image: story-machine.PNG
+    display_width: 76.5
     crop:
       x: 0
       y: 805
@@ -67,35 +68,35 @@ project_gallery:
       image: gallery/iCloud Photos (28)/iCloud Photos/69751936350__33F67997-6ABC-4BA5-8B07-D1DC7BBFCBFD.JPEG
       alt: 'Project photo: 69751936350__33F67997-6ABC-4BA5-8B07-D1DC7BBFCBFD.JPEG'
       caption: 69751936350__33F67997-6ABC-4BA5-8B07-D1DC7BBFCBFD.JPEG
-      featured: true
+      featured: false
       thumbnail: gallery/thumbnails/photo-272dcff79f44.jpg
       preview: gallery/previews/photo-272dcff79f44.jpg
     - id: photo-f14da76bafff
       image: gallery/iCloud Photos (28)/iCloud Photos/69752016614__F9066C0F-B384-4643-9424-77E58CF5D80A.JPEG
       alt: 'Project photo: 69752016614__F9066C0F-B384-4643-9424-77E58CF5D80A.JPEG'
       caption: 69752016614__F9066C0F-B384-4643-9424-77E58CF5D80A.JPEG
-      featured: true
+      featured: false
       thumbnail: gallery/thumbnails/photo-f14da76bafff.jpg
       preview: gallery/previews/photo-f14da76bafff.jpg
     - id: photo-dc29b1da42f0
       image: gallery/iCloud Photos (28)/iCloud Photos/69895264989__8ACE3EF0-E784-4638-B72C-D865E80934C2.JPEG
       alt: 'Project photo: 69895264989__8ACE3EF0-E784-4638-B72C-D865E80934C2.JPEG'
       caption: 69895264989__8ACE3EF0-E784-4638-B72C-D865E80934C2.JPEG
-      featured: true
+      featured: false
       thumbnail: gallery/thumbnails/photo-dc29b1da42f0.jpg
       preview: gallery/previews/photo-dc29b1da42f0.jpg
     - id: photo-9655cc94ddd5
       image: gallery/iCloud Photos (28)/iCloud Photos/69895330865__9C0BF038-675C-4095-8529-7C2DF1FA306F.JPEG
       alt: 'Project photo: 69895330865__9C0BF038-675C-4095-8529-7C2DF1FA306F.JPEG'
       caption: 69895330865__9C0BF038-675C-4095-8529-7C2DF1FA306F.JPEG
-      featured: true
+      featured: false
       thumbnail: gallery/thumbnails/photo-9655cc94ddd5.jpg
       preview: gallery/previews/photo-9655cc94ddd5.jpg
     - id: photo-607c0cee4501
       image: gallery/iCloud Photos (28)/iCloud Photos/69895433040__6E302A65-758B-459C-97E6-151D1C7C4692.JPEG
       alt: 'Project photo: 69895433040__6E302A65-758B-459C-97E6-151D1C7C4692.JPEG'
       caption: 69895433040__6E302A65-758B-459C-97E6-151D1C7C4692.JPEG
-      featured: true
+      featured: false
       thumbnail: gallery/thumbnails/photo-607c0cee4501.jpg
       preview: gallery/previews/photo-607c0cee4501.jpg
     - id: photo-763814a33434
@@ -174,6 +175,7 @@ project_gallery:
       alt: 'Project photo: 70137534688__77DF031A-237D-4032-B790-9EAE7294FE94.JPEG'
       caption: 70137534688__77DF031A-237D-4032-B790-9EAE7294FE94.JPEG
       featured: false
+      preview: gallery/previews/photo-a559f70f49f6.jpg
       thumbnail: gallery/thumbnails/photo-a559f70f49f6.jpg
     - id: photo-c16f7b50e45b
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_0494.JPEG
@@ -358,8 +360,9 @@ project_gallery:
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_0876.JPEG
       alt: 'Project photo: IMG_0876.JPEG'
       caption: IMG_0876.JPEG
-      featured: false
+      featured: true
       thumbnail: gallery/thumbnails/photo-62ec10643b1d.jpg
+      preview: gallery/previews/photo-62ec10643b1d.jpg
     - id: photo-50ebca3a8f13
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_0877.JPEG
       alt: 'Project photo: IMG_0877.JPEG'
@@ -774,7 +777,8 @@ project_gallery:
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_4597.JPEG
       alt: 'Project photo: IMG_4597.JPEG'
       caption: IMG_4597.JPEG
-      featured: false
+      featured: true
+      preview: gallery/previews/photo-3cb76db69e23.jpg
       thumbnail: gallery/thumbnails/photo-3cb76db69e23.jpg
     - id: photo-2fbdfc8f35dd
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_5059.JPEG
@@ -935,13 +939,9 @@ project_gallery:
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_2382.JPEG
       alt: 'Project photo: IMG_2382.JPEG'
       caption: IMG_2382.JPEG
-      featured: false
+      featured: true
       thumbnail: gallery/thumbnails/photo-91f088bd65e6.jpg
-    - id: video-7f8d10847974
-      video: gallery/iCloud Photos (28)/iCloud Photos/IMG_2387.MP4
-      alt: 'Project video: IMG_2387.MP4'
-      caption: IMG_2387.MP4
-      featured: false
+      preview: gallery/previews/photo-91f088bd65e6.jpg
     - id: photo-93237578413e
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_2388.JPEG
       alt: 'Project photo: IMG_2388.JPEG'
@@ -1002,7 +1002,8 @@ project_gallery:
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_6095.JPEG
       alt: 'Project photo: IMG_6095.JPEG'
       caption: IMG_6095.JPEG
-      featured: false
+      featured: true
+      preview: gallery/previews/photo-bdba1d2f12ce.jpg
       thumbnail: gallery/thumbnails/photo-bdba1d2f12ce.jpg
     - id: photo-3810901dbe35
       image: gallery/iCloud Photos (28)/iCloud Photos/IMG_6096.JPEG
@@ -1155,14 +1156,17 @@ showcase_sections:
   - id: gallery
     title: Gallery
     gallery_key: project_gallery
-  - id: artwork
-    title: Artwork & Graphics
   - id: mechanical
     title: Mechanical Assemblies
   - id: electronics
     title: Electronics & Controls
   - id: design-vpx
     title: 3D Design & VPX
+    image: /_projects/custom-electromechanical-pinball-machine/3d-files/Screenshot%202026-11-04%20014628.png
+    image_alt: Pinball table being edited in Visual Pinball.
+    download_url: /_projects/custom-electromechanical-pinball-machine/3d-files/SuperMarioPinball.vpx
+    download_name: SuperMarioPinball.vpx
+    download_label: Download the Visual Pinball table (.vpx)
   - id: game-software
     title: Game Design & Software
   - id: build-process

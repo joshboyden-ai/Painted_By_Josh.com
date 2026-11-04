@@ -1,5 +1,10 @@
 (() => {
   document.querySelectorAll('[data-project-showcase]').forEach((showcase) => {
+    showcase.querySelectorAll('[data-confirm-download]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (!window.confirm(`Download ${link.getAttribute('download')}?`)) event.preventDefault();
+      });
+    });
     const panels = [...showcase.querySelectorAll('[data-showcase-panel]')];
     if (!panels.length) return;
     const links = [...showcase.querySelectorAll('.showcase-nav a')];

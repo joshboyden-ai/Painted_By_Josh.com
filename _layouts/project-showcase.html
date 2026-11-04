@@ -1,8 +1,8 @@
 ---
 layout: wrapper
 ---
-<link rel="stylesheet" href="{{ '/css/project-showcase.css' | relative_url }}?v=native-story-4">
-{% if page.project_gallery %}<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=previews-4">{% endif %}
+<link rel="stylesheet" href="{{ '/css/project-showcase.css' | relative_url }}?v=native-story-9">
+{% if page.project_gallery %}<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=era-covers-9">{% endif %}
 <main class="project-showcase" data-project-showcase aria-labelledby="showcase-title">
   <header class="showcase-header">
     <h1 id="showcase-title">{{ page.title }}</h1>
@@ -41,7 +41,9 @@ layout: wrapper
             {% elsif section.story_key %}
               {% include project-story.html items=story_items section_id=section.id heading=section.title %}
             {% elsif section.image %}
+              {% if section.download_url %}<a class="showcase-file-preview" href="{{ section.download_url | relative_url }}" download="{{ section.download_name | escape }}" data-confirm-download>{% endif %}
               <img class="showcase-section-image" src="{{ section.image | relative_url }}" alt="{{ section.image_alt | default: section.title | escape }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
+              {% if section.download_url %}<span>{{ section.download_label | escape }}</span></a><p class="showcase-file-note">Requires Visual Pinball to open.</p>{% endif %}
             {% elsif section.content_file %}
               {% capture section_content %}{% include_relative {{ section.content_file }} %}{% endcapture %}
               {{ section_content | markdownify }}
@@ -55,4 +57,4 @@ layout: wrapper
     </div>
   </div>
 </main>
-<script src="{{ '/assets/js/project-showcase.js' | relative_url }}?v=normal-page-2" defer></script>
+<script src="{{ '/assets/js/project-showcase.js' | relative_url }}?v=file-download-3" defer></script>

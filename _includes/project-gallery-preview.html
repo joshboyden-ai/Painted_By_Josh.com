@@ -9,6 +9,7 @@
           {% assign photo_path = gallery_directory | append: media_name %}
           {% assign photo_file = site.static_files | where: 'path', photo_path | first %}
           <a class="project-gallery-slot" href="{{ include.gallery.url | relative_url }}#{{ photo.id }}" aria-label="View {{ photo.alt | default: group.title | escape }} in the full gallery">
+            <h3 class="project-gallery-slot-title">{{ group.title | escape }}</h3>
             {% if photo.video %}
               <div class="project-gallery-placeholder project-gallery-video-tile"><span aria-hidden="true">&#9654;</span><span>Play video</span></div>
             {% elsif photo.image and photo.image != '' and photo_file %}
@@ -22,7 +23,6 @@
             {% else %}
               <div class="project-gallery-placeholder"><span>Photo to be added</span></div>
             {% endif %}
-            {% if photo.caption and photo.caption != '' %}<span class="project-gallery-slot-caption">{{ photo.caption | escape }}</span>{% endif %}
           </a>
         {% endif %}
       {% endfor %}
