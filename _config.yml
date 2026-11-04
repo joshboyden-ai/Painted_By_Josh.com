@@ -157,6 +157,15 @@ include:
   - _projects
   - _artworks
 
+# Gallery links use /_projects/. Avoid a second copy of the same media
+# at the collection's /projects/ URLs in the published site.
+defaults:
+  - scope:
+      path: "projects/custom-electromechanical-pinball-machine/gallery"
+      type: projects
+    values:
+      published: false
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.

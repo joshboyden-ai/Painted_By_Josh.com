@@ -31,6 +31,36 @@ body:has(.project-showcase) > nav { position: fixed; inset: 0 0 auto; height: 64
 .project-showcase .showcase-media-area img, .project-showcase .showcase-media-area video, .project-showcase .showcase-media-area iframe { max-width: 100%; }
 .project-showcase .showcase-image-area { display: block; padding: 0; border: 0; min-height: 0; background: transparent; }
 .project-showcase .showcase-section-image { display: block; width: 100%; height: auto; }
+/* Editable story blocks, enabled only for sections that define a story array. */
+.project-showcase .showcase-story-area { display: block; min-height: 0; padding: 0; border: 0; background: transparent; }
+.project-showcase .project-story-blocks { display: grid; gap: clamp(40px, 5vw, 80px); }
+.project-showcase .project-story-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 56px); }
+.project-showcase .project-story-text { grid-column: 1; grid-row: 1; }
+.project-showcase .project-story .project-story-text p { max-width: 62ch; margin: 0; color: var(--text-color); font-size: clamp(16px, 1.3vw, 20px); line-height: 1.85; }
+.project-showcase .project-story-figure { grid-column: 2; grid-row: 1; margin: 0; min-width: 0; }
+.project-showcase .project-story-block:nth-child(even) .project-story-text { grid-column: 2; }
+.project-showcase .project-story-block:nth-child(even) .project-story-figure { grid-column: 1; }
+.project-showcase .project-story-figure img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: contain; }
+.project-showcase .project-story-crop { position: relative; width: min(var(--story-display-width, 100%), var(--story-display-max-width, calc(560px * var(--story-crop-ratio)))); aspect-ratio: var(--story-crop-ratio); margin-inline: auto; overflow: hidden; }
+.project-showcase .project-story-crop img { position: absolute; width: var(--story-source-width); max-width: none; max-height: none; height: auto; left: var(--story-source-left); top: var(--story-source-top); }
+.project-showcase .project-story-figure figcaption { margin-top: 12px; color: #596170; font-size: 13px; line-height: 1.6; }
+.project-showcase .project-story-image-placeholder { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; background: var(--light-background-color); color: #596170; padding: 24px; text-align: center; }
+.project-showcase .project-story-image-placeholder span { color: inherit; font-size: 14px; }
+.project-showcase .project-story-full { margin-top: 40px; }
+.project-showcase .project-story-full > summary { display: flex; width: fit-content; align-items: center; justify-content: center; gap: 24px; min-height: 48px; padding: 12px 22px; border-radius: 6px; background: #9e1b32; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; list-style: none; }
+.project-showcase .project-story-full > summary::-webkit-details-marker { display: none; }
+.project-showcase .project-story-full > summary::after { content: '+'; font-size: 20px; line-height: 1; }
+.project-showcase .project-story-full[open] > summary::after { content: '-'; }
+.project-showcase .project-story-full > summary:hover { background: #7f1528; }
+.project-showcase .project-story-full > summary:focus-visible { outline: 3px solid var(--link-color); outline-offset: 3px; }
+.project-showcase .project-story-full-content { max-width: 70ch; margin-top: 24px; }
+.project-showcase .project-story-full-content h3 { margin-bottom: 12px; font-size: 22px; font-weight: 600; }
+.project-showcase .project-story-full-content p { font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+@media (max-width: 1000px) {
+  .project-showcase .project-story-block { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .project-showcase .project-story-block .project-story-text { grid-column: 1; grid-row: 1; }
+  .project-showcase .project-story-block .project-story-figure { grid-column: 1; grid-row: 2; }
+}
 .project-showcase a:hover { text-decoration: underline; }
 .project-showcase a:focus-visible, .project-showcase select:focus-visible { outline: 3px solid var(--link-color); outline-offset: 3px; }
 @media (max-width: 800px) {

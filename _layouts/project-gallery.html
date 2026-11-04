@@ -1,0 +1,77 @@
+---
+layout: wrapper
+---
+{% assign gallery_project = site.projects | where: 'gallery_id', page.project_id | first %}
+{% assign gallery_directory = gallery_project.path | split: '/' | pop | join: '/' | prepend: '/' | append: '/' %}
+<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=era-banners-7">
+<main class="project-gallery-page" data-project-gallery aria-labelledby="project-gallery-title">
+  <header class="project-gallery-header">
+    <h1 id="project-gallery-title">Gallery</h1>
+  </header>
+  <div class="project-gallery-viewer">
+    <figure class="project-gallery-stage">
+      <h2 class="project-gallery-stage-title" data-gallery-era>{{ gallery_project.project_gallery.groups.first.title }}</h2>
+      <div class="project-gallery-carousel" data-gallery-carousel tabindex="0" role="group" aria-label="Gallery viewer. Use Left and Right arrow keys to change items.">
+        <button class="project-gallery-neighbor" type="button" data-gallery-previous aria-label="Previous gallery item">
+          <img data-neighbor-image hidden alt="" draggable="false" decoding="async">
+          <span class="project-gallery-placeholder project-gallery-video-tile" data-neighbor-video hidden><span aria-hidden="true">&#9654;</span><span>Video</span></span>
+          <span class="project-gallery-placeholder" data-neighbor-empty hidden><span>Photo to be added</span></span>
+          <span class="project-gallery-neighbor-arrow" aria-hidden="true">&#8249;</span>
+          <span class="project-gallery-scroll-cue" data-neighbor-cue hidden><span data-cue-arrow aria-hidden="true">&rarr;</span><span>Scroll</span></span>
+        </button>
+      <div class="project-gallery-display">
+        <img data-gallery-main hidden alt="" draggable="false">
+        <video data-gallery-video hidden controls autoplay muted playsinline preload="none" aria-label="Selected project video"></video>
+        <div class="project-gallery-placeholder" data-gallery-empty><span>Photo to be added</span></div>
+      </div>
+        <button class="project-gallery-neighbor" type="button" data-gallery-next aria-label="Next gallery item">
+          <img data-neighbor-image hidden alt="" draggable="false" decoding="async">
+          <span class="project-gallery-placeholder project-gallery-video-tile" data-neighbor-video hidden><span aria-hidden="true">&#9654;</span><span>Video</span></span>
+          <span class="project-gallery-placeholder" data-neighbor-empty hidden><span>Photo to be added</span></span>
+          <span class="project-gallery-neighbor-arrow" aria-hidden="true">&#8250;</span>
+          <span class="project-gallery-scroll-cue" data-neighbor-cue hidden><span data-cue-arrow aria-hidden="true">&larr;</span><span>Scroll</span></span>
+        </button>
+      </div>
+      <figcaption data-gallery-caption aria-live="polite">Select a photo or video to view it here.</figcaption>
+      <a data-gallery-original hidden target="_blank" rel="noopener noreferrer">Open original video</a>
+    </figure>
+    <aside class="project-gallery-collection" aria-label="Photos and videos grouped by build stage">
+      {% for group in gallery_project.project_gallery.groups %}
+        <section class="project-gallery-group" aria-labelledby="gallery-group-{{ forloop.index }}">
+          <h2 id="gallery-group-{{ forloop.index }}"><button type="button" class="project-gallery-group-banner" data-gallery-group-title="{{ group.title | escape }}" aria-label="View the first item in {{ group.title | escape }}">{{ group.title }}</button></h2>
+          <div class="project-gallery-thumbnails">
+            {% for photo in group.images %}
+              {% unless photo.live_photo %}
+              {% assign media_type = 'image' %}
+              {% assign media_name = photo.image %}
+              {% if photo.video %}{% assign media_type = 'video' %}{% assign media_name = photo.video %}{% endif %}
+              {% assign photo_path = gallery_directory | append: media_name %}
+              {% assign photo_file = site.static_files | where: 'path', photo_path | first %}
+              {% assign thumbnail_path = '' %}
+              {% if media_type == 'image' and photo.image and photo.image != '' and photo_file %}
+                {% assign thumbnail_path = photo_path %}
+                {% if photo.thumbnail %}
+                  {% assign small_path = gallery_directory | append: photo.thumbnail %}
+                  {% assign small_file = site.static_files | where: 'path', small_path | first %}
+                  {% if small_file %}{% assign thumbnail_path = small_path %}{% endif %}
+                {% endif %}
+              {% endif %}
+              <button type="button" class="project-gallery-thumbnail" id="{{ photo.id }}" data-gallery-photo data-photo-id="{{ photo.id }}" data-media-type="{{ media_type }}" data-photo-group="{{ group.title | escape }}" data-preview-src="{% if thumbnail_path != '' %}{{ thumbnail_path | relative_url | escape }}{% endif %}" data-photo-src="{% if media_name and media_name != '' and photo_file %}{{ photo_path | relative_url | escape }}{% endif %}" data-photo-alt="{{ photo.alt | default: group.title | escape }}" data-photo-caption="{{ photo.caption | default: group.title | escape }}" aria-label="View {{ photo.alt | default: group.title | escape }} {{ media_type }} {{ forloop.index }}" aria-pressed="false">
+                {% if media_type == 'video' %}
+                  <span class="project-gallery-placeholder project-gallery-video-tile"><span aria-hidden="true">&#9654;</span><span>Play video</span></span>
+                {% elsif photo.image and photo.image != '' and photo_file %}
+                  <img src="{{ thumbnail_path | relative_url }}" alt="" loading="lazy" decoding="async" width="160" height="120">
+                {% else %}
+                  <span class="project-gallery-placeholder"><span>Photo to be added</span></span>
+                {% endif %}
+              </button>
+              {% endunless %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </aside>
+  </div>
+  <noscript><p>Enable JavaScript to select photos and videos in the viewer.</p></noscript>
+</main>
+<script src="{{ '/assets/js/project-gallery.js' | relative_url }}?v=era-banners-7" defer></script>

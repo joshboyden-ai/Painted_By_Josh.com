@@ -1,7 +1,8 @@
 ---
 layout: wrapper
 ---
-<link rel="stylesheet" href="{{ '/css/project-showcase.css' | relative_url }}?v=project-banner-3">
+<link rel="stylesheet" href="{{ '/css/project-showcase.css' | relative_url }}?v=native-story-4">
+{% if page.project_gallery %}<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=previews-4">{% endif %}
 <main class="project-showcase" data-project-showcase aria-labelledby="showcase-title">
   <header class="showcase-header">
     <h1 id="showcase-title">{{ page.title }}</h1>
@@ -23,14 +24,23 @@ layout: wrapper
     </aside>
     <div class="showcase-panels" id="showcase-panels">
       {% for section in page.showcase_sections %}
+        {% assign story_items = nil %}
+        {% if section.story_key %}{% assign story_items = page[section.story_key] %}{% endif %}
         <section class="showcase-panel" id="{{ section.id }}" aria-labelledby="{{ section.id }}-title" data-showcase-panel>
           <div class="showcase-panel-content" data-panel-content>
+          {% unless section.story_key %}
           <div class="showcase-panel-heading{% if section.hide_heading %} showcase-heading-hidden{% endif %}">
             <h2 id="{{ section.id }}-title" tabindex="-1">{{ section.title }}</h2>
-            {% unless section.image %}<p>{{ section.placeholder | default: 'Future project content will go here.' }}</p>{% endunless %}
+            {% unless section.image or section.story_key or section.gallery_key %}<p>{{ section.placeholder | default: 'Future project content will go here.' }}</p>{% endunless %}
           </div>
-          <div class="showcase-media-area{% if section.image %} showcase-image-area{% endif %}">
-            {% if section.image %}
+          {% endunless %}
+          <div class="showcase-media-area{% if section.gallery_key %} showcase-image-area{% elsif section.story_key %} showcase-story-area{% elsif section.image %} showcase-image-area{% endif %}">
+            {% if section.gallery_key %}
+              {% assign gallery_data = page[section.gallery_key] %}
+              {% include project-gallery-preview.html gallery=gallery_data project=page %}
+            {% elsif section.story_key %}
+              {% include project-story.html items=story_items section_id=section.id heading=section.title %}
+            {% elsif section.image %}
               <img class="showcase-section-image" src="{{ section.image | relative_url }}" alt="{{ section.image_alt | default: section.title | escape }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
             {% elsif section.content_file %}
               {% capture section_content %}{% include_relative {{ section.content_file }} %}{% endcapture %}

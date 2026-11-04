@@ -1,0 +1,32 @@
+{% assign gallery_directory = include.project.path | split: '/' | pop | join: '/' | prepend: '/' | append: '/' %}
+<div class="project-gallery-preview">
+  <div class="project-gallery-featured">
+    {% for group in include.gallery.groups %}
+      {% for photo in group.images %}
+        {% if photo.featured and photo.live_photo != true %}
+          {% assign media_name = photo.image %}
+          {% if photo.video %}{% assign media_name = photo.video %}{% endif %}
+          {% assign photo_path = gallery_directory | append: media_name %}
+          {% assign photo_file = site.static_files | where: 'path', photo_path | first %}
+          <a class="project-gallery-slot" href="{{ include.gallery.url | relative_url }}#{{ photo.id }}" aria-label="View {{ photo.alt | default: group.title | escape }} in the full gallery">
+            {% if photo.video %}
+              <div class="project-gallery-placeholder project-gallery-video-tile"><span aria-hidden="true">&#9654;</span><span>Play video</span></div>
+            {% elsif photo.image and photo.image != '' and photo_file %}
+              {% assign preview_path = photo_path %}
+              {% if photo.preview %}
+                {% assign small_path = gallery_directory | append: photo.preview %}
+                {% assign small_file = site.static_files | where: 'path', small_path | first %}
+                {% if small_file %}{% assign preview_path = small_path %}{% endif %}
+              {% endif %}
+              <img src="{{ preview_path | relative_url }}" alt="{{ photo.alt | default: group.title | escape }}" loading="lazy" decoding="async" width="640" height="480">
+            {% else %}
+              <div class="project-gallery-placeholder"><span>Photo to be added</span></div>
+            {% endif %}
+            {% if photo.caption and photo.caption != '' %}<span class="project-gallery-slot-caption">{{ photo.caption | escape }}</span>{% endif %}
+          </a>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <a class="project-gallery-all" href="{{ include.gallery.url | relative_url }}">View All Photos &amp; Videos &rarr;</a>
+</div>

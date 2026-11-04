@@ -1,0 +1,40 @@
+{% assign project_directory = page.path | split: '/' | pop | join: '/' | prepend: '/' | append: '/' %}
+<div class="project-story">
+  <div class="project-story-blocks">
+    {% for item in include.items %}
+      <div class="project-story-block">
+        <div class="project-story-text">
+          {% if forloop.first %}<h2 id="{{ include.section_id }}-title" tabindex="-1">{{ include.heading }}</h2>{% endif %}
+          <p>{{ item.text | escape }}</p>
+        </div>
+        <figure class="project-story-figure"{% if item.display_width or item.display_max_width %} style="{% if item.display_width %}--story-display-width: {{ item.display_width }}%;{% endif %}{% if item.display_max_width %} --story-display-max-width: {{ item.display_max_width }}px;{% endif %}"{% endif %}>
+          {% assign story_image_path = project_directory | append: item.image %}
+          {% assign story_image = site.static_files | where: 'path', story_image_path | first %}
+          {% if item.image and item.image != '' and story_image %}
+            {% if item.crop %}
+              <div class="project-story-crop" style="--story-crop-ratio: {{ item.crop.width | times: 1.0 | divided_by: item.crop.height }}; --story-source-width: {{ item.crop.source_width | times: 100.0 | divided_by: item.crop.width }}%; --story-source-left: {{ item.crop.x | times: -100.0 | divided_by: item.crop.width }}%; --story-source-top: {{ item.crop.y | times: -100.0 | divided_by: item.crop.height }}%;">
+            {% endif %}
+            <img src="{{ story_image_path | relative_url }}" alt="{{ item.alt | default: 'Project story photo' | escape }}" loading="lazy" decoding="async">
+            {% if item.crop %}</div>{% endif %}
+          {% else %}
+            <div class="project-story-image-placeholder" role="img" aria-label="Story image to be added">
+              <span>Story image to be added</span>
+            </div>
+          {% endif %}
+          {% if item.caption and item.caption != '' %}<figcaption>{{ item.caption | escape }}</figcaption>{% endif %}
+        </figure>
+      </div>
+    {% endfor %}
+  </div>
+  <details class="project-story-full" id="{{ include.section_id }}-full-story">
+    <summary>Read Full Story</summary>
+    <div class="project-story-full-content">
+      <h3>Full Story</h3>
+      {% if page.full_story and page.full_story != '' %}
+        {{ page.full_story | markdownify }}
+      {% else %}
+        <p>{{ page.full_story_placeholder | default: 'The full story will be added here.' | escape }}</p>
+      {% endif %}
+    </div>
+  </details>
+</div>
