@@ -88,7 +88,6 @@ nav .right a {
 
 nav .right a:last-child
  {
-    border: 2px solid var(--link-color);
     color: var(--link-color);
     padding: 3px 15px;
     border-radius: 10px;
