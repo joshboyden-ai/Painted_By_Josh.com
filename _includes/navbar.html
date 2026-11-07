@@ -1,29 +1,34 @@
 <!-- _includes/nav.html -->
 <nav>
+    {% assign active_section = '' %}
+    {% if page.url == '/' %}
+        {% assign active_section = 'home' %}
+    {% elsif page.url contains '/projects/' or page.collection == 'projects' or page.layout == 'project-showcase' or page.layout == 'project-gallery' %}
+        {% assign active_section = 'engineering' %}
+    {% elsif page.url contains '/artwork/' or page.url contains '/commissions/' or page.collection == 'artworks' or page.layout == 'artwork' %}
+        {% assign active_section = 'artwork' %}
+    {% endif %}
     <div class="left">
-        {% if page.layout == 'project-gallery' %}
-            <a href="{{ page.project_return_url | relative_url }}" aria-label="Back to project">&larr; Back</a>
-        {% elsif page.collection == 'projects' or page.layout == 'project-showcase' %}
-            <a href="{{ '/projects/' | relative_url }}" aria-label="Back to engineering projects">&larr; Back</a>
-        {% elsif page.url contains '/commissions/' %}
-            <a href="/commissions/">Commissions</a>
-        {% elsif page.url contains '/artwork/' %}
-            <a href="/artwork/">Artwork Gallery</a>
-        {% else %}
-            <a href="/">Home</a>
+        {% if active_section == 'engineering' %}
+            <a class="section-brand" href="{{ '/projects/' | relative_url }}">
+                <img src="{{ '/assets/images/banner/Builds%20By%20Boyden2.png' | relative_url }}" alt="Builds by Boyden — Engineering" width="3258" height="724">
+            </a>
+        {% elsif active_section == 'artwork' %}
+            <a class="section-brand" href="{{ '/artwork/' | relative_url }}">
+                <img src="{{ '/assets/images/banner/BuildsByBoydenBanner1.png' | relative_url }}" alt="Painted by Josh — Artwork" width="3258" height="724">
+            </a>
         {% endif %}
     </div>
-
     <!-- Desktop Menu -->
     <div class="right desktop-nav">
-        <a href="/">
+        <a href="/"{% if active_section == 'home' %} class="nav-current" aria-current="page"{% endif %}>
             <span>Home</span>
         </a>
-        <a href="/projects/">
-            <span>Projects</span>
+        <a href="/projects/"{% if active_section == 'engineering' %} class="nav-current" aria-current="{% if page.url == '/projects/' %}page{% else %}true{% endif %}"{% endif %}>
+            <span>Engineering</span>
         </a>
-        <a href="{{site.resume-url}}" target="_blank" rel="noopener noreferrer">
-            <span>Resume</span>
+        <a href="/artwork/"{% if active_section == 'artwork' %} class="nav-current" aria-current="{% if page.url == '/artwork/' %}page{% else %}true{% endif %}"{% endif %}>
+            <span>Artwork</span>
         </a>
     </div>
 
@@ -34,14 +39,14 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-nav">
-        <a href="/">
+        <a href="/"{% if active_section == 'home' %} class="nav-current" aria-current="page"{% endif %}>
             <span>Home</span>
         </a>
-        <a href="/projects/">
-            <span>Projects</span>
+        <a href="/projects/"{% if active_section == 'engineering' %} class="nav-current" aria-current="{% if page.url == '/projects/' %}page{% else %}true{% endif %}"{% endif %}>
+            <span>Engineering</span>
         </a>
-        <a href="{{site.resume-url}}" target="_blank" rel="noopener noreferrer">
-            <span>Resume</span>
+        <a href="/artwork/"{% if active_section == 'artwork' %} class="nav-current" aria-current="{% if page.url == '/artwork/' %}page{% else %}true{% endif %}"{% endif %}>
+            <span>Artwork</span>
         </a>
     </div>
 </nav>

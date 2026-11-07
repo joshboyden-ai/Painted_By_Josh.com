@@ -1,17 +1,16 @@
 <main class="engineering-page">
     {% assign featured_project = site.projects | first %}
 
-    <div class="engineering-banner" aria-label="Engineering portfolio banner">
-        <span>Engineering Portfolio</span>
-    </div>
+    <h1 class="engineering-banner" id="engineering-title">Engineering Portfolio</h1>
 
     <section class="engineering-hero" aria-labelledby="engineering-title">
         <div class="engineering-hero-text">
-            <h1 id="engineering-title">Engineering Portfolio</h1>
+            <h2 class="engineering-story-title">My Building Story</h2>
             <p>
-                Mechanical engineering projects focused on design, fabrication, controls,
-                testing, and hands-on problem solving. This section highlights the process
-                behind each build, from early concepts through final iteration.
+                I'm Josh, a mechanical engineering student at the University of Alabama.
+                Building a custom pinball machine brought my interests in mechanical design,
+                electronics, and fabrication together. I enjoy the whole process: designing
+                a mechanism, making the parts, and testing and refining how it works.
             </p>
             <div class="engineering-hero-options" aria-label="Engineering actions">
                 <a class="engineering-hero-option" href="#engineering-projects">
@@ -26,6 +25,10 @@
                     <span>Portfolio</span>
                     <small>View my engineering portfolio PDF</small>
                 </a>
+                <a class="engineering-hero-option engineering-instagram" href="https://www.instagram.com/builds_by_boyden/" target="_blank" rel="noopener noreferrer">
+                    <span>@builds_by_boyden</span>
+                    <small>Instagram &middot; follow my builds in progress</small>
+                </a>
             </div>
         </div>
 
@@ -33,19 +36,20 @@
             <a class="featured-project" href="{{ featured_project.url | relative_url }}" aria-label="View featured project {{ featured_project.title }}">
                 {% assign folder_path = featured_project.path | split: "/" | slice: 0, 2 | join: "/" %}
                 {% assign featured_project_image = "/" | append: folder_path | append: featured_project['main-image'] %}
+                <div class="featured-project-banner">Featured Project</div>
                 <div class="featured-project-image-wrap">
                     <img class="featured-project-image" src="{{ featured_project_image }}" alt="{{ featured_project.title }} featured project image">
                 </div>
                 <div class="featured-project-content">
-                    <p class="artwork-kicker">Featured Project</p>
-                    <h2>{{ featured_project.title }}</h2>
+                    <h2>Homebrew Pinball Machine</h2>
                     <p>{{ featured_project.description }}</p>
                 </div>
             </a>
         {% endif %}
     </section>
 
-    <section id="engineering-projects" class="project-grid-section" aria-label="Engineering projects">
+    <section id="engineering-projects" class="project-grid-section" aria-labelledby="projects-section-title">
+        <h2 class="engineering-section-banner" id="projects-section-title">Projects</h2>
         <div class="grid-container">
             {% for item in site.projects %}
                 <a href="{{ item.url | relative_url }}" class="project-link">
@@ -56,16 +60,26 @@
                             <img src="{{ image_path }}" alt="{{ item.title }} image">
                         </div>
                         <h3 class="project-title">{{ item.title }}</h3>
-                        <div class="project-skills">
-                            {% for skill in item.skills %}
-                                <span class="skill">{{ skill }}</span>
-                            {% endfor %}
-                        </div>
-                        <p class="project-description">{{ item.description }}</p>
-                        <span class="read-more">Read more</span>
+                        <p class="project-description">{{ item.card-description | default: item.description }}</p>
                     </div>
                 </a>
             {% endfor %}
+        </div>
+    </section>
+    <section class="engineering-library-section" aria-labelledby="designs-section-title">
+        <h2 class="engineering-section-banner" id="designs-section-title">3D Designs</h2>
+        <p class="engineering-section-note">CAD models and printable parts will be collected here.</p>
+    </section>
+
+    <section class="engineering-library-section" aria-labelledby="vpx-section-title">
+        <h2 class="engineering-section-banner" id="vpx-section-title">VPX Tables</h2>
+        <div class="engineering-resource-grid">
+            <a class="engineering-resource-card" href="{{ '/_projects/custom-electromechanical-pinball-machine/3d-files/SuperMarioPinball.vpx' | relative_url }}" download>
+                <img src="{{ '/_projects/custom-electromechanical-pinball-machine/3d-files/Screenshot 2026-11-04 014628.png' | relative_url }}" alt="Super Mario Pinball table preview" loading="lazy">
+                <h3>Super Mario Pinball</h3>
+                <p>Download the Visual Pinball X table.</p>
+                <span>Download .vpx</span>
+            </a>
         </div>
     </section>
 </main>

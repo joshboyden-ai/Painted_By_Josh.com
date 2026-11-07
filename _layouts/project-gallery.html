@@ -3,7 +3,7 @@ layout: wrapper
 ---
 {% assign gallery_project = site.projects | where: 'gallery_id', page.project_id | first %}
 {% assign gallery_directory = gallery_project.path | split: '/' | pop | join: '/' | prepend: '/' | append: '/' %}
-<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=era-banners-7">
+<link rel="stylesheet" href="{{ '/css/project-gallery.css' | relative_url }}?v=era-banners-8">
 <main class="project-gallery-page" data-project-gallery aria-labelledby="project-gallery-title">
   <header class="project-gallery-header">
     <h1 id="project-gallery-title">Gallery</h1>
@@ -74,4 +74,4 @@ layout: wrapper
   </div>
   <noscript><p>Enable JavaScript to select photos and videos in the viewer.</p></noscript>
 </main>
-<script src="{{ '/assets/js/project-gallery.js' | relative_url }}?v=era-banners-7" defer></script>
+<script src="{{ '/assets/js/project-gallery.js' | relative_url }}?v=era-banners-8" defer></script>

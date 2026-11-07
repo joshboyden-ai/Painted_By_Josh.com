@@ -1,6 +1,7 @@
 ---
 layout: project-showcase
-title: Custom Electromechanical Pinball Machine
+title: Homebrew Pinball Machine
+card-description: A custom pinball machine combining mechanical design, electronics, and hands-on fabrication.
 description: Designed and built a custom electromechanical pinball machine integrating mechanical mechanisms, CAD-modeled assemblies, fabricated components, electronics, embedded controls, and iterative testing.
 skills:
   - Mechanical Design

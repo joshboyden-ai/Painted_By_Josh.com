@@ -4,7 +4,7 @@ html:has(.project-showcase) { scrollbar-gutter: stable; }
 body:has(.project-showcase) { padding-top: 128px; }
 body:has(.project-showcase) > nav { position: fixed; inset: 0 0 auto; height: 64px; padding: 0 24px; background: var(--background-color); z-index: 1200; }
 .project-showcase { --showcase-offset: 128px; --showcase-height: calc(100svh - var(--showcase-offset)); width: calc(100vw - 40px); margin: 0 0 40px calc(50% - 50vw + 20px); color: var(--text-color); }
-.project-showcase .showcase-header { position: fixed; inset: 64px 0 auto; min-height: 64px; display: flex; align-items: center; justify-content: center; padding: 12px 24px; background: #9e1b32; color: #fff; text-align: center; z-index: 1100; }
+.project-showcase .showcase-header { position: fixed; inset: 64px 0 auto; min-height: 64px; display: flex; align-items: center; justify-content: center; padding: 12px 24px; background: #9e1b32; color: #fff; text-align: center; z-index: 1300; }
 .project-showcase h1 { color: inherit; font-size: clamp(17px, 2vw, 27px); line-height: 1.3; margin: 0; }
 .project-showcase .showcase-shell { display: grid; grid-template-columns: minmax(0, 1fr) clamp(180px, 16vw, 220px); align-items: start; }
 .project-showcase .showcase-sidebar { grid-column: 2; grid-row: 1; padding: 24px 0 16px 8px; position: sticky; top: var(--showcase-offset); }
