@@ -1,0 +1,51 @@
+---
+layout: wrapper
+title: ALL
+hidden: true
+permalink: /artwork/ALL/
+description: Unsorted artwork photos, ready to organize into painting groups.
+---
+
+<main class="artwork-detail-page artwork-all-page">
+    <a class="back-to-gallery" href="{{ '/artwork/' | relative_url }}">Back to Artwork</a>
+    <header class="artwork-detail-header">
+        <p class="artwork-kicker">Photo Sorting Gallery</p>
+        <h1>ALL</h1>
+        <p>Select a thumbnail to view a photo. Use its filename when choosing a painting group.</p>
+    </header>
+    <div class="artwork-all-viewer" data-artwork-all>
+        <figure class="artwork-all-stage">
+            <a data-all-original target="_blank" rel="noopener" hidden><img data-all-image alt="" hidden></a>
+            <figcaption data-all-caption aria-live="polite">Select a photo</figcaption>
+            <div class="artwork-all-controls">
+                <button type="button" data-all-previous>Previous</button>
+                <button type="button" data-all-next>Next</button>
+            </div>
+        </figure>
+        <aside class="artwork-all-thumbnails" aria-label="All photo thumbnails">
+        <div class="artwork-all-grid">
+        {% assign photo_count = 0 %}
+        {% assign photos = site.static_files | sort: 'path' %}
+        {% for photo in photos %}
+            {% assign extension = photo.extname | downcase %}
+            {% if photo.path contains '/_artworks/ALL/' %}
+                {% if extension == '.jpg' or extension == '.jpeg' or extension == '.png' or extension == '.webp' or extension == '.gif' or extension == '.avif' %}
+                    {% assign photo_count = photo_count | plus: 1 %}
+                    <button type="button" class="artwork-all-photo" data-photo-src="{{ photo.path | relative_url | escape }}" data-photo-name="{{ photo.name | escape }}" aria-label="View photo {{ photo_count }}: {{ photo.name | escape }}" aria-pressed="false">
+                        <img src="{{ photo.path | relative_url | escape }}" alt="Unsorted artwork photo {{ photo.name | escape }}" loading="lazy">
+                        <span>{{ photo_count }}</span>
+                    </button>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+        </aside>
+    </div>
+    {% if photo_count == 0 %}
+        <p class="artwork-all-empty">No photos yet. Drop your JPG, PNG, WebP, GIF, or AVIF files into <strong>_artworks/ALL/</strong>, then refresh this page after the preview rebuilds.</p>
+    {% else %}
+        <p>{{ photo_count }} photos</p>
+    {% endif %}
+</main>
+
+<script src="{{ "/assets/js/artwork-all.js" | relative_url }}?v=1" defer></script>

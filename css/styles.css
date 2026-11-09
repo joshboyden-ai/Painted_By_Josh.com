@@ -60,6 +60,21 @@ p {
   }
   
 
+.artwork-all-viewer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr); gap: 24px; margin: 24px 0; align-items: start; }
+.artwork-all-stage { position: sticky; top: 16px; min-width: 0; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--light-background-color); }
+.artwork-all-stage img { display: block; width: 100%; height: min(62vh, 680px); object-fit: contain; }
+.artwork-all-stage figcaption { font-size: 13px; overflow-wrap: anywhere; margin: 12px 0; }
+.artwork-all-controls { display: flex; justify-content: space-between; gap: 12px; }
+.artwork-all-controls button { padding: 8px 16px; background: #fff; color: #9e1b32; border: 1px solid #9e1b32; border-radius: 5px; cursor: pointer; }
+.artwork-all-controls button:disabled { opacity: .4; cursor: default; }
+.artwork-all-thumbnails { padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; max-height: 75vh; overflow: auto; }
+.artwork-all-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 5px; }
+.artwork-all-photo { min-width: 0; padding: 2px; border: 2px solid transparent; border-radius: 4px; color: var(--text-color); background: var(--light-background-color); cursor: pointer; }
+.artwork-all-photo img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.artwork-all-photo span { display: block; font-size: 10px; line-height: 1.4; }
+.artwork-all-photo:hover, .artwork-all-photo:focus-visible, .artwork-all-photo[aria-pressed="true"] { border-color: #9e1b32; }
+@media (max-width: 900px) { .artwork-all-viewer { grid-template-columns: 1fr; } .artwork-all-stage { position: static; } .artwork-all-stage img { height: 48vh; } .artwork-all-thumbnails { max-height: 40vh; } }
+
 /* NAVBAR */
 nav {
     display: flex;
@@ -606,6 +621,10 @@ nav .mobile-nav {
     aspect-ratio: 3 / 2;
     object-position: center;
     margin-bottom: 0;
+}
+
+.engineering-page .project-card-image-wrap img.project-card-model-preview {
+    object-fit: contain;
 }
 
 .engineering-page .project-card .project-title {
