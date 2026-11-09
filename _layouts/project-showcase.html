@@ -43,7 +43,7 @@ layout: wrapper
             {% elsif section.image %}
               {% if section.download_url %}<a class="showcase-file-preview" href="{{ section.download_url | relative_url }}" download="{{ section.download_name | escape }}" data-confirm-download>{% endif %}
               <img class="showcase-section-image" src="{{ section.image | relative_url }}" alt="{{ section.image_alt | default: section.title | escape }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
-              {% if section.download_url %}<span>{{ section.download_label | escape }}</span></a><p class="showcase-file-note">Requires Visual Pinball to open.</p>{% endif %}
+              {% if section.download_url %}<span>{{ section.download_label | escape }}</span></a><p class="showcase-file-note">{{ section.file_note | default: 'Requires Visual Pinball to open.' | escape }}</p>{% endif %}
             {% elsif section.content_file %}
               {% capture section_content %}{% include_relative {{ section.content_file }} %}{% endcapture %}
               {{ section_content | markdownify }}

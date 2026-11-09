@@ -57,7 +57,7 @@
                         {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
                         {% assign image_path = "/" | append: folder_path | append: item['main-image'] %}
                         <div class="project-card-image-wrap">
-                            <img src="{{ image_path }}" alt="{{ item.title }} image">
+                            <img{% if item.design_download %} class="project-card-model-preview"{% endif %} src="{{ image_path }}" alt="{{ item.title }} image">
                         </div>
                         <h3 class="project-title">{{ item.title }}</h3>
                         <p class="project-description">{{ item.card-description | default: item.description }}</p>
@@ -68,7 +68,34 @@
     </section>
     <section class="engineering-library-section" aria-labelledby="designs-section-title">
         <h2 class="engineering-section-banner" id="designs-section-title">3D Designs</h2>
-        <p class="engineering-section-note">CAD models and printable parts will be collected here.</p>
+        <div class="engineering-resource-grid">
+            <article class="engineering-resource-card">
+                <div class="engineering-design-photos">
+                <a href="{{ '/assets/3d-designs/IMG_9280.JPEG' | relative_url }}" target="_blank" rel="noopener" aria-label="View full-size Hat Stand photo">
+                    <img src="{{ '/assets/3d-designs/IMG_9280.JPEG' | relative_url }}" alt="Physical Hat Stand design" loading="lazy">
+                </a>
+                <a href="{{ '/assets/3d-designs/Screenshot%202026-11-09%20171741.png' | relative_url }}" target="_blank" rel="noopener" aria-label="View full-size Hat Stand design screenshot">
+                    <img src="{{ '/assets/3d-designs/Screenshot%202026-11-09%20171741.png' | relative_url }}" alt="Hat Stand design screenshot" loading="lazy">
+                </a>
+                </div>
+                <h3>Hat Stand</h3>
+                <p>A printable hat stand, with the original CAD part available to download.</p>
+                <div class="engineering-design-downloads">
+                    <a href="{{ '/assets/3d-designs/HatStand.stl' | relative_url }}" download>Download STL for printing</a>
+                    <a href="{{ '/assets/3d-designs/HatStand.ipt' | relative_url }}" download>Download Inventor part (.ipt)</a>
+                </div>
+            </article>
+            {% for item in site.projects %}
+                {% if item.design_download %}
+                    <a class="engineering-resource-card" href="{{ item.design_download | relative_url }}" download>
+                        <img src="{{ item.design_preview | relative_url }}" alt="{{ item.title | escape }} assembly preview" loading="lazy">
+                        <h3>{{ item.title }} Assembly</h3>
+                        <p>Autodesk Inventor assembly file.</p>
+                        <span>Download .iam</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
     </section>
 
     <section class="engineering-library-section" aria-labelledby="vpx-section-title">

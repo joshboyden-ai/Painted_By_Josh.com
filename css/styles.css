@@ -689,6 +689,30 @@ nav .mobile-nav {
     margin-bottom: 8px;
 }
 
+.engineering-design-downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.engineering-design-photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.engineering-design-photos a {
+    min-width: 0;
+}
+
+.engineering-design-downloads a {
+    color: #9e1b32;
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 .engineering-resource-card p,
 .engineering-resource-card span {
     font-size: 13px;
